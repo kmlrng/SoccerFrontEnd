@@ -181,7 +181,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },     
 
-
+  IconButtonColor:
+  {
+    color:'#190a28',
+  },
 
 
 }));
@@ -282,21 +285,21 @@ export default function Dashboard() {
       <CssBaseline />
       <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
         <Toolbar className={classes.toolbar}>
-          <IconButton
+          <IconButton 
             edge="start"
-            color='inherit'
+           
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
           >
-            <MenuIcon />
+            <MenuIcon className={classes.IconButtonColor} />
           </IconButton>
           <a href="/">
           <img src={headerlogo} alt="Logo" height="50px" width="150px"/>
           </a>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
-              <SearchIcon />
+              <SearchIcon className={classes.IconButtonColor} />
             </div>
             <InputBase
               placeholder="Search…"
@@ -311,12 +314,12 @@ export default function Dashboard() {
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="secondary">
-                <MailIcon />
+                <MailIcon className={classes.IconButtonColor}/>
               </Badge>
             </IconButton>
             <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
-                <NotificationsIcon />
+              <Badge badgeContent={17} color="secondary" background-color="#ff3a3a">
+                <NotificationsIcon className={classes.IconButtonColor}/>
               </Badge>
             </IconButton>
             <IconButton
@@ -327,7 +330,7 @@ export default function Dashboard() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+              <AccountCircle className={classes.IconButtonColor}/>
             </IconButton>
           </div>
           <div className={classes.sectionMobile}>

@@ -12,6 +12,7 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import backgroundside from './backgroundside.jpg';
 
 
 
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   
   },
   image: {
-    backgroundImage: 'url(https://images-na.ssl-images-amazon.com/images/I/81jh9kCTBGL._SL1500_.jpg)',
+    backgroundImage: `url(${backgroundside})`,
     backgroundRepeat: 'no-repeat',
     backgroundColor:'#190a28',
     backgroundSize: 'cover',
@@ -48,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     marginTop: theme.spacing(15),
-    margin: theme.spacing(8, 4),
+    margin: theme.spacing(12, 6),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -131,9 +132,6 @@ export default function SignInSide() {
                 </Link>
               </Grid>
             </Grid>
-            <Box mt={5}>
-              <Copyright />
-            </Box>
           </form>
         </div>
       </Grid>

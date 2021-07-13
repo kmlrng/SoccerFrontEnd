@@ -29,7 +29,8 @@ function Copyright() {
 const useStyles = makeStyles((theme) => ({
 
   paper: {
-    marginTop: theme.spacing(14),
+    marginTop: theme.spacing(15),
+    marginBottom: theme.spacing(7),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -133,9 +134,6 @@ export default function SignUp() {
           </Grid>
         </form>
       </div>
-      <Box mt={5}>
-        <Copyright />
-      </Box>
-    </Container>
+         </Container>
   );
 }

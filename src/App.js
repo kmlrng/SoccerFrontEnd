@@ -6,6 +6,7 @@ import SignUp from './MyComponents/SignUp';
 import { ThemeProvider } from "@material-ui/styles";
 import { createTheme } from '@material-ui/core/styles';
 import {BrowserRouter,Route, Switch, Redirect } from 'react-router-dom';
+import Footer from './MyComponents/Footer.js';
 
 
 
@@ -16,6 +17,18 @@ import {BrowserRouter,Route, Switch, Redirect } from 'react-router-dom';
 const theme = createTheme({
   
   overrides: {
+
+   MuiBadge:{
+     colorSecondary:{
+       backgroundColor:'#ff3d3d',
+     },
+  },
+
+    MuiAvatar:{
+      colorDefault:{
+        color:'#190a28',
+      },
+    },
 
     MuiMenuItem:{
       root:{
@@ -51,11 +64,15 @@ const theme = createTheme({
     MuiPaper: {
       root: {
         backgroundColor:'#190a28',
+        color:'White',
       },
     },
     MuiTypography:{
       root:{
         color:"White",
+      },
+      colorTextSecondary:{
+        color:'White',
       },
     },
     MuiListItemIcon:{
@@ -72,7 +89,7 @@ const theme = createTheme({
       // contrastText: will be calculated to contrast with palette.primary.main
     },
     secondary: {
-      light: '#ffffff',
+      light: '#31134f',
       main: '#190a28',
       // dark: will be calculated from palette.secondary.main,
       contrastText: '#ffffff',
@@ -96,6 +113,7 @@ function App() {
  
  <ThemeProvider theme={theme}>
   <PrimarySearchAppBar/> 
+  <Footer/>
   
   
  
