@@ -14,9 +14,10 @@ import Container from "@material-ui/core/Container";
 import { useState, useEffect } from "react";
 import "./Logout.css";
 import { useDispatch, useSelector } from "react-redux";
-import { login, logout } from "../features/userSlice";
-import axios from "axios";
 
+import axios from "axios";
+import { connect } from "react-redux";
+import { signup } from "../store/utils/thunkCreators";
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(15),
@@ -38,41 +39,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignUp() {
+const SignUp = (props) => {
+  const { user, signup } = props;
+
   const classes = useStyles();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    dispatch(
-      login({
-        name: name,
-        email: email,
-        password: password,
-        loggedIn: true,
-      })
-    );
-    const temp = { email_id: email, name: name, password: password };
-    axios
-      .post("http://127.0.0.1:8080/sign_up/", temp, {
-        headers: {
-          accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        console.log(res.data);
-      });
-
-    setEmail("");
-    setPassword("");
+signup({
+  name,
+  email_id: email,
+  password
+});
+  
   };
 
   return (
@@ -85,11 +70,7 @@ export default function SignUp() {
         <Typography component="h1" variant="h5">
           Sign up
         </Typography>
-        <form
-          className={classes.form}
-          noValidate
-          onSubmit={(e) => handleSubmit(e)}
-        >
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
@@ -159,4 +140,20 @@ export default function SignUp() {
       </div>
     </Container>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signup: (payload) => {
+      dispatch(signup(payload));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

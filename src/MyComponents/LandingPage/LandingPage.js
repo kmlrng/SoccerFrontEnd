@@ -2,7 +2,7 @@ import React from "react";
 // nodejs library that concatenates classes
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
-
+import { connect } from "react-redux";
 // @material-ui/icons
 
 // core components
@@ -18,7 +18,7 @@ import styles from "./landingPagedesign.js";
 
 const useStyles = makeStyles(styles);
 
-export default function LandingPage(props) {
+const  LandingPage = (props) => {
   const classes = useStyles();
   return (
     <div>
@@ -28,10 +28,7 @@ export default function LandingPage(props) {
             <GridItem xs={12} sm={12} md={6}>
               <h1 className={classes.title}>Your Story Starts With Us.</h1>
               <h4>
-                Every landing page needs a small description after the big bold
-                title, that{"'"}s why we added this text here. Add here all the
-                information that can make you or your product create the first
-                impression.
+               {JSON.stringify(props.user, null , 2)}
               </h4>
               <br />
               <Button
@@ -52,3 +49,11 @@ export default function LandingPage(props) {
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+export default connect(mapStateToProps)(LandingPage);
+

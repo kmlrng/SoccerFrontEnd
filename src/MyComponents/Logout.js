@@ -1,20 +1,21 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./Logout.css";
-import {selectUser } from "../features/userSlice";
+// import {selectUser } from "../features/userSlice";
+import { logout } from "../store/utils/thunkCreators";
 
-const Logout = () => {
+import { connect } from "react-redux";
+const Logout = (props) => {
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
-
+  
   const logout = (e) => {
-    dispatch(logout());
+    dispatch(props.logout());
   };
 
   return (
     <form className="logout">
       <h1>
-        Welcome <span className="user__name">{user.email}</span>!
+        Welcome <span className="user__name">{props.user.email}</span>!
       </h1>
       <button className="logout__button" onClick={(e) => logout(e)}>
         Log out
@@ -23,5 +24,19 @@ const Logout = () => {
     </form>
   );
 };
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: (payload) => {
+      dispatch(logout(payload));
+    },
+  };
+};
 
-export default Logout;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Logout);
+
