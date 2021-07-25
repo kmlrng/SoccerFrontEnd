@@ -1,4 +1,4 @@
-import React from 'react';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,10 +13,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import backgroundside from './backgroundside.jpg';
-
-
-
-
+import React,{useState, useEffect}  from 'react';
+import "./Logout.css";
+import { useDispatch, useSelector } from "react-redux";
+import { login, logout } from "../features/userSlice";
+import axios from 'axios';
 
 
 
@@ -68,8 +69,44 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignInSide() {
+export default function SignInSide({location, history}) {
   const classes = useStyles();
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+  
+    const dispatch = useDispatch();
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+  
+      dispatch(
+        login({
+          name: name,
+          email: email,
+          password: password,
+          loggedIn: true,
+        })
+      );
+      var querystring = require('querystring');
+      axios.post('http://127.0.0.1:8080/token', 
+      querystring.stringify({
+        username: email, 
+        password: password,
+}),
+    {headers:{'accept':'application/JSON',
+      'Content-Type':'application/x-www-form-urlencoded'}})
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+      });
+      
+      setEmail("");
+      setPassword("");
+
+     
+    };
+  
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -84,8 +121,8 @@ export default function SignInSide() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} noValidate>
-            <TextField
+          <form className={classes.form} noValidate onSubmit={(e) => handleSubmit(e)} >
+            <TextField 
               variant="outlined"
               margin="normal"
               required
@@ -95,7 +132,11 @@ export default function SignInSide() {
               name="email"
               autoComplete="email"
               autoFocus
-            />
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+               />
+        
             <TextField
               variant="outlined"
               margin="normal"
@@ -106,6 +147,8 @@ export default function SignInSide() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="secondary" />}

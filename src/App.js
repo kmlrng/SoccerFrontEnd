@@ -1,11 +1,8 @@
 
 import './App.css';
-import SignInSide from './MyComponents/SignInSide';
 import PrimarySearchAppBar from './MyComponents/PrimarySearchAppBar';
-import SignUp from './MyComponents/SignUp';
 import { ThemeProvider } from "@material-ui/styles";
 import { createTheme } from '@material-ui/core/styles';
-import {BrowserRouter,Route, Switch, Redirect } from 'react-router-dom';
 import Footer from './MyComponents/Footer.js';
 
 
